@@ -12,3 +12,8 @@
   - Track Returning Users: In Firebase User Collection, add a created_at timestamp field. Users with accounts older than 30 days are flagged as returning users.
   - Log Workout Sessions: Use FlutterFlow's "Log Event" action to send a workout_completed event to Firebase Analytics when a user taps "End Workout."
   - Calculate Average: Divide total workout_completed events from returning users by total returning users.
+ 
+- **Metric 4: First Workout Completion Rate**
+  - Track New Users: In Firebase User Collection, use the created_at timestamp to identify users who signed up within the last 7 days.
+  - Log First Workout Events: Use FlutterFlow’s "Log Event" action to send a first_workout_started event when a user begins their first session and a first_workout_completed event when they finish it.
+  - Calculate Completion Rate: Divide the number of first_workout_completed events by the number of first_workout_started events for new users to determine the percentage of users who successfully complete their first workout.
