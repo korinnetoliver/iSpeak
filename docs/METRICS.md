@@ -7,3 +7,8 @@
 - **Metric 2: Number of Registered Users**
   - Track User Login time: In Firebase user collection, we are able to see the time that a user logs into the app itself.
   - Track new Users weekly: For a set amount of weeks, identify how many new users on average register for the app based off of features we've tested on (rating the app, etc)
+
+- **Metric 3: Amount of Sessions Per Returning User on Average**
+  - Track Returning Users: In Firebase User Collection, add a created_at timestamp field. Users with accounts older than 30 days are flagged as returning users.
+  - Log Workout Sessions: Use FlutterFlow's "Log Event" action to send a workout_completed event to Firebase Analytics when a user taps "End Workout."
+  - Calculate Average: Divide total workout_completed events from returning users by total returning users.
