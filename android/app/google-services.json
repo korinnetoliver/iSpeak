@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "381639589115",
+    "project_id": "i-speak-xf26f2",
+    "storage_bucket": "i-speak-xf26f2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:381639589115:android:305b03e36330050828c45e",
+        "android_client_info": {
+          "package_name": "com.mycompany.ispeak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "381639589115-152raa8l4giljjd1ece7hdfgfs0ijujo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.ispeak",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "381639589115-00q7lr66u0dlel02l0d37cru3gck305o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-tHYRONfJNm2EuTb1RhG5wFLwe-ld9vQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "381639589115-00q7lr66u0dlel02l0d37cru3gck305o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "381639589115-k2j5cm9q6isilu3lanhogs3oiufk97uq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.ispeak"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:381639589115:android:894feb22ef832b3e28c45e",
+        "android_client_info": {
+          "package_name": "com.uricsc305.iSpeak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "381639589115-8cmbk1ltidk09gopqcq5afmockgqp61j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.uricsc305.iSpeak",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "381639589115-00q7lr66u0dlel02l0d37cru3gck305o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-tHYRONfJNm2EuTb1RhG5wFLwe-ld9vQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "381639589115-00q7lr66u0dlel02l0d37cru3gck305o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "381639589115-k2j5cm9q6isilu3lanhogs3oiufk97uq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.ispeak"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
