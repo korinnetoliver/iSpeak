@@ -1,0 +1,42 @@
+USER STORY: Accessing Personalized AI Workout Motivation (Golden Path)
+
+
+AS A user,
+ I WANT TO log in and access my profile with my workout streak and goals, then start a personalized AI voice workout session,
+ SO THAT I can receive motivation from a chosen celebrity voice tailored to my goals and continue building my workout streak.
+SCENARIO: User Logs In and Accesses Profile
+GIVEN the user opens the iSpeak app,
+ WHEN the user selects "Log In" and enters valid credentials,
+ THEN the system should authenticate the user through Firebase
+ WITHIN 3 seconds,
+ AND redirect the user to their profile screen
+ WITHIN 2 seconds.
+
+SCENARIO: Viewing Workout Streak and Goals
+GIVEN the user is on their profile screen,
+ WHEN the profile page loads,
+ THEN the system should display the user’s current workout streak (number of consecutive workout days)
+ WITHIN 2 seconds,
+ AND display the user’s saved personal goals and rewards that will be used for AI-generated motivation.
+
+SCENARIO: Continue Streak Button Navigation
+GIVEN the user is on their profile screen,
+ WHEN the user clicks the "Continue Streak" button,
+ THEN the system should navigate the user to the AI Voice Setup screen
+ WITHIN 2 seconds.
+SCENARIO: Selecting Voice and Intensity
+GIVEN the user is on the AI Voice Setup screen,
+ WHEN the user selects a preferred celebrity voice persona from the available options,
+ AND selects a motivation intensity mode (Light, Standard, or Intense),
+ THEN the system should save the selected preferences for the session
+ WITHIN 1 second,
+ AND enable the "Start Session" button.
+
+SCENARIO: Starting AI Voice Workout Session
+GIVEN the user has selected a voice persona and intensity level,
+ WHEN the user clicks the "Start Session" button,
+ THEN the system should generate a personalized motivational script using the user’s saved goals and rewards
+ WITHIN 3 seconds,
+ AND begin playing AI-generated voice motivation audio
+ WITHIN 5 seconds,
+ AND start the workout timer for the session.
