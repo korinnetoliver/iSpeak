@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iSpeak | Your Choice. Your Voice.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+            --dark: #0a0a0a;
+            --gray-dark: #141414;
+            --gray: #1a1a1a;
+            --gray-light: #2a2a2a;
+            --white: #ffffff;
+            --accent: #4fc3dc;
+            --accent-hover: #3db5ce;
+            --purple: #8b5cf6;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 48px;
+            z-index: 1000;
+            background: transparent;
+            transition: background 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 48px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 24px;
+            position: relative;
+            background: linear-gradient(180deg, var(--black) 0%, #0d0d1a 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-logo {
+            font-size: clamp(80px, 15vw, 180px);
+            font-weight: 900;
+            letter-spacing: -8px;
+            line-height: 0.9;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .hero-logo .i {
+            color: var(--white);
+        }
+
+        .hero-logo .speak {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: clamp(18px, 3vw, 28px);
+            font-weight: 300;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            opacity: 0.6;
+            margin-bottom: 48px;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            max-width: 500px;
+            opacity: 0.7;
+            font-weight: 400;
+            margin-bottom: 48px;
+            line-height: 1.7;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 48px;
+            background: var(--white);
+            color: var(--black);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 0;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--accent);
+            color: var(--black);
+            transform: translateY(-2px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 48px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.4;
+        }
+
+        .scroll-indicator span {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 48px;
+            background: linear-gradient(180deg, var(--white), transparent);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 120px 48px;
+        }
+
+        .section-label {
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: clamp(36px, 6vw, 72px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            opacity: 0.6;
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--dark);
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--gray);
+            padding: 64px 48px;
+            transition: background 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background: var(--gray-light);
+        }
+
+        .feature-number {
+            font-size: 64px;
+            font-weight: 900;
+            color: var(--accent);
+            opacity: 0.3;
+            line-height: 1;
+            margin-bottom: 24px;
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .feature-card p {
+            font-size: 15px;
+            opacity: 0.6;
+            line-height: 1.7;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            background: var(--black);
+        }
+
+        .how-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .how-text {
+            padding-right: 40px;
+        }
+
+        .steps-list {
+            margin-top: 48px;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 24px;
+            padding: 32px 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .step-item:first-child {
+            border-top: 1px solid var(--gray-light);
+        }
+
+        .step-num {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent);
+            min-width: 32px;
+        }
+
+        .step-content h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .step-content p {
+            font-size: 14px;
+            opacity: 0.5;
+        }
+
+        .how-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .phone-mockup {
+            width: 280px;
+            height: 580px;
+            background: linear-gradient(135deg, var(--purple) 0%, var(--accent) 100%);
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 0 50px 100px rgba(139, 92, 246, 0.3);
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--gray-dark);
+            border-radius: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 24px;
+        }
+
+        .phone-screen .app-name {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .phone-screen .app-tagline {
+            font-size: 12px;
+            opacity: 0.5;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--gray-dark);
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 1.8;
+            opacity: 0.8;
+        }
+
+        .about-text strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+            margin-top: 80px;
+            padding-top: 80px;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Documentation Section */
+        .documentation {
+            background: var(--black);
+        }
+
+        .doc-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .doc-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .doc-card {
+            background: var(--gray);
+            padding: 48px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doc-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .doc-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .doc-card:hover {
+            background: var(--gray-light);
+        }
+
+        .doc-icon {
+            font-size: 32px;
+            margin-bottom: 24px;
+        }
+
+        .doc-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .doc-card p {
+            font-size: 15px;
+            opacity: 0.6;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .doc-card ul {
+            list-style: none;
+        }
+
+        .doc-card li {
+            font-size: 14px;
+            padding: 8px 0;
+            opacity: 0.5;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .doc-card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Getting Started */
+        .getting-started {
+            background: linear-gradient(135deg, var(--purple) 0%, #4f46e5 100%);
+            text-align: center;
+        }
+
+        .gs-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .gs-steps {
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+            margin-top: 64px;
+        }
+
+        .gs-step {
+            flex: 1;
+            text-align: center;
+        }
+
+        .gs-num {
+            width: 56px;
+            height: 56px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .gs-step h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .gs-step p {
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--black);
+            text-align: center;
+            padding: 160px 48px;
+        }
+
+        .cta-title {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 900;
+            letter-spacing: -4px;
+            margin-bottom: 32px;
+        }
+
+        .cta-subtitle {
+            font-size: 18px;
+            opacity: 0.5;
+            margin-bottom: 48px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            padding: 64px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .footer-logo span {
+            color: var(--accent);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 13px;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .copyright {
+            font-size: 12px;
+            opacity: 0.3;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .how-content {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .how-visual {
+                order: -1;
+            }
+
+            .doc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 16px 24px;
+            }
+
+            .nav-links {
+                gap: 24px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            section {
+                padding: 80px 24px;
+            }
+
+            .hero-logo {
+                letter-spacing: -4px;
+            }
+
+            .tagline {
+                letter-spacing: 4px;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .gs-steps {
+                flex-direction: column;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .phone-mockup {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="logo">i<span>Speak</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#docs">Documentation</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-logo">
+            <span class="i">i</span><span class="speak">Speak</span>
+        </div>
+        <p class="tagline">Your Choice · Your Voice</p>
+        <p class="hero-subtitle">AI-powered voice motivation that moves with you. Choose your motivator. Crush your goals.</p>
+        <a href="#" class="cta-button">
+            Get Started
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+        </a>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="features-header">
+            <p class="section-label">Features</p>
+            <h2 class="section-title">Everything you need<br>to stay motivated</h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-number">01</div>
+                <h3>Choose Your Voice</h3>
+                <p>Select from athletes, celebrities, and coaches. Your motivation, your way.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-number">02</div>
+                <h3>Set Your Goals</h3>
+                <p>Personal goals power personalized motivation. Tell us what drives you.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-number">03</div>
+                <h3>Track Your Streak</h3>
+                <p>Build consistency. Watch your streak grow. Stay accountable.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="how-content">
+            <div class="how-text">
+                <p class="section-label">How It Works</p>
+                <h2 class="section-title">Start in<br>60 seconds</h2>
+                <p class="section-subtitle">No complicated setup. No learning curve. Just download, set your goal, and go.</p>
+                
+                <div class="steps-list">
+                    <div class="step-item">
+                        <span class="step-num">01</span>
+                        <div class="step-content">
+                            <h4>Download</h4>
+                            <p>Get iSpeak from Google Play</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-num">02</span>
+                        <div class="step-content">
+                            <h4>Set Your Goal</h4>
+                            <p>Add your goal, target date, and reward</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-num">03</span>
+                        <div class="step-content">
+                            <h4>Pick Your Voice</h4>
+                            <p>Choose who motivates you</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-num">04</span>
+                        <div class="step-content">
+                            <h4>Start Moving</h4>
+                            <p>Get personalized AI motivation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="how-visual">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="app-name">iSpeak</div>
+                        <div class="app-tagline">Your Voice Awaits</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <p class="section-label">About</p>
+            <h2 class="section-title">Motivation is personal</h2>
+            <p class="about-text">
+                <strong>iSpeak</strong> is built on one belief: the right voice at the right time can push you further than you thought possible. Whether it's <strong>The Rock</strong> hyping you up, a <strong>calm coach</strong> guiding you through, or an <strong>intense drill sergeant</strong> pushing your limits — we deliver motivation tailored to your goals, in a voice that moves you.
+            </p>
+            <div class="about-stats">
+                <div class="stat">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Voice Personas</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Intensity Modes</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Motivation</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section class="documentation" id="docs">
+        <div class="doc-header">
+            <p class="section-label">User Guide</p>
+            <h2 class="section-title">Documentation</h2>
+            <p class="section-subtitle">Everything you need to get the most out of iSpeak.</p>
+        </div>
+        <div class="doc-grid">
+            <div class="doc-card">
+                <div class="doc-icon">🎙️</div>
+                <h3>Voice Selection</h3>
+                <p>Browse and select from a variety of voice personas to deliver your workout motivation.</p>
+                <ul>
+                    <li>Quick Options: Hype Trainer, Calm Coach, Drill Sergeant</li>
+                    <li>Filter by: Athletes, Celebrities, Coaches</li>
+                    <li>Preview voices before selecting</li>
+                </ul>
+            </div>
+            <div class="doc-card">
+                <div class="doc-icon">🎯</div>
+                <h3>Goal Tracking</h3>
+                <p>Set personal goals with target dates and rewards. Your goals power your AI motivation.</p>
+                <ul>
+                    <li>Active goal displays on home screen</li>
+                    <li>Tap goal card for motivational message</li>
+                    <li>Add multiple goals from Profile</li>
+                </ul>
+            </div>
+            <div class="doc-card">
+                <div class="doc-icon">⏱️</div>
+                <h3>Workout Sessions</h3>
+                <p>Start timed sessions with your selected voice and intensity mode.</p>
+                <ul>
+                    <li>Choose Light, Standard, or Intense</li>
+                    <li>Timer tracks your workout duration</li>
+                    <li>Pause/resume anytime</li>
+                </ul>
+            </div>
+            <div class="doc-card">
+                <div class="doc-icon">📊</div>
+                <h3>Progress & Streaks</h3>
+                <p>Track consistency with streaks and view your complete workout history.</p>
+                <ul>
+                    <li>Day streak for consecutive workouts</li>
+                    <li>Total workout count</li>
+                    <li>Most used voice and mode stats</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Getting Started -->
+    <section class="getting-started">
+        <div class="gs-content">
+            <p class="section-label">Get Started</p>
+            <h2 class="section-title">Ready in 4 steps</h2>
+            <div class="gs-steps">
+                <div class="gs-step">
+                    <div class="gs-num">1</div>
+                    <h4>Download</h4>
+                    <p>Get iSpeak from Google Play Store</p>
+                </div>
+                <div class="gs-step">
+                    <div class="gs-num">2</div>
+                    <h4>Sign Up</h4>
+                    <p>Create account with email</p>
+                </div>
+                <div class="gs-step">
+                    <div class="gs-num">3</div>
+                    <h4>Set Goals</h4>
+                    <p>Add your goal and reward</p>
+                </div>
+                <div class="gs-step">
+                    <div class="gs-num">4</div>
+                    <h4>Work Out</h4>
+                    <p>Choose voice and start</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2 class="cta-title">Your voice awaits.</h2>
+        <p class="cta-subtitle">Download iSpeak and start your journey today.</p>
+        <a href="#" class="cta-button">
+            Download Now
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">i<span>Speak</span></div>
+        <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#docs">Documentation</a></li>
+        </ul>
+        <p class="copyright">© 2026 iSpeak. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+
+</body>
+</html>
